@@ -3,9 +3,9 @@
 @section('title', 'Planos')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    <h1>Planos</h1>
 @stop
 
 @section('content')
-    <p>Welcome to this beautiful admin panel.</p>
+    <p>Listagem dos planos.</p>
 @stop
