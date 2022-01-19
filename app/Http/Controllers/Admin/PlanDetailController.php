@@ -65,7 +65,7 @@ class PlanDetailController extends Controller
         if(!$plan = $this->plan->where('url', $planUrl)->first()){
             return redirect()->back();
         }
-        
+
         $plan->details()->create($request->all());
 
         return redirect()->route('plan.details.index', ['url' => $plan->url]);
@@ -90,9 +90,19 @@ class PlanDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($planUrl, $detailId)
     {
-        //
+        $plan = $this->plan->where('url', $planUrl)->first();
+        $detail = $this->repository->find($detailId);
+
+        if(!$plan || !$detail){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.details.edit', [
+            'plan' => $plan,
+            'detail' => $detail
+        ]);
     }
 
     /**
@@ -102,9 +112,17 @@ class PlanDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $planUrl, $detailId)
     {
-        //
+        $plan = $this->plan->where('url', $planUrl)->first();
+        $detail = $this->repository->find($detailId);
+
+        if(!$plan || !$detail){
+            return redirect()->back();
+        }
+
+        $detail->update($request->all());
+        return redirect()->route('plan.details.index', ['url' => $plan->url]);
     }
 
     /**
