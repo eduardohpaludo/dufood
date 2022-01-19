@@ -80,9 +80,19 @@ class PlanDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($planUrl, $detailId)
     {
-        //
+        $plan = $this->plan->where('url', $planUrl)->first();
+        $detail = $this->repository->find($detailId);
+
+        if(!$plan || !$detail){
+            return redirect()->back();
+        }
+
+        return view('admin.pages.plans.details.show', [
+            'plan' => $plan,
+            'detail' => $detail
+        ]);
     }
 
     /**
@@ -132,8 +142,20 @@ class PlanDetailController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($planUrl, $detailId)
     {
-        //
+        $plan = $this->plan->where('url', $planUrl)->first();
+        $detail = $this->repository->find($detailId);
+
+        if(!$plan || !$detail){
+            return redirect()->back();
+        }
+
+        $detail->delete();
+
+        return redirect()
+                    ->route('plan.details.index', ['url' => $plan->url])
+                    ->with('message', 'Registro deletado com sucesso');
+
     }
 }
