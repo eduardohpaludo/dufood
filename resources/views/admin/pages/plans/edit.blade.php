@@ -10,9 +10,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('plans.update', ['url' => $plan->url]) }}" class="form" method="post">
-                @csrf
                 @method('PUT')
-
                 @include('admin.pages.plans._partials.form')
             </form>
 

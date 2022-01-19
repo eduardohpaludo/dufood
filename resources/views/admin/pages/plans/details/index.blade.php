@@ -3,7 +3,7 @@
 @section('title', "Detalhes do plano - {$plan->name}")
 
 @section('content_header')
-    <h1>Detalhes do plano - {{$plan->name}}</h1>
+    <h1>Detalhes do plano - {{$plan->name}} - <a href="{{ route('plan.details.create', ['url' => $plan['url']]) }}" class="btn btn-dark">Adicionar</a></h1></h1>
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}">Dashboard</a></li>
         <li class="breadcrumb-item active"><a href="{{ route('plans.index') }}">Planos</a></li>
@@ -27,8 +27,8 @@
                     <tr>
                         <td>{{$detail['name']}}</td>
                         <td>
-                            <a href="{{ route('plans.edit', ['url' => $detail['url']]) }}" class="btn btn-info" ><i class="fas fa-pencil-alt"></i></a>
-                            <a href="{{ route('plans.show', ['url' => $detail['url']]) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                            <a href="{{ route('plans.edit', ['url' => $plan['url']]) }}" class="btn btn-info" ><i class="fas fa-pencil-alt"></i></a>
+                            <a href="{{ route('plans.show', ['url' => $plan['url']]) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                         </td>
                     </tr>
                 @endforeach
