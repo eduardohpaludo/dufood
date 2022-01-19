@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdatePlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -15,7 +16,7 @@ class PlanController extends Controller
     public function __construct(Plan $plan){
         $this->repository = $plan;
     }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -46,11 +47,9 @@ class PlanController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreUpdatePlan $request)
     {
-        $data = $request->all();
-        $data['url'] =  Str::kebab($request->name);
-        $this->repository->create($data);
+        $this->repository->create($request->all());
 
         return redirect()->route('plans.index');
     }
@@ -67,7 +66,7 @@ class PlanController extends Controller
 
         if(!$plan)
             return redirect()->back();
-        
+
         return view('admin.pages.plans.show', [
             'plan' => $plan
         ]);
@@ -79,9 +78,17 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($url)
     {
-        //
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+
+        return view('admin.pages.plans.edit', [
+            'plan' => $plan
+        ]);
+
     }
 
     /**
@@ -91,9 +98,17 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreUpdatePlan $request, $url)
     {
-        //
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+
+        $plan->update($request->all());
+
+        return redirect()->route('plans.index');
+
     }
 
     /**
@@ -102,8 +117,27 @@ class PlanController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($url)
     {
-        //
+        $plan = $this->repository->where('url', $url)->first();
+
+        if(!$plan)
+            return redirect()->back();
+
+        $plan->delete();
+
+        return redirect()->route('plans.index');
+    }
+
+    public function search(Request $request){
+
+        $filters = $request->except('_token');
+
+        $plans = $this->repository->search($request->filter);
+
+        return view('admin.pages.plans.index', [
+            'plans' => $plans,
+            'filters' => $filters
+        ]);
     }
 }
