@@ -15,7 +15,7 @@ class CreatePlanDetailsTable extends Migration
     {
         Schema::create('plan_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plan_id')->constrained();
+            $table->foreignId('plan_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->timestamps();
         });
