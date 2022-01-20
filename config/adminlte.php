@@ -248,6 +248,12 @@ return [
             'icon' => 'fas fa-fw fa-list-alt',
         ],
         [
+            'text' => 'Perfis',
+            'url'  => 'admin/profiles',
+            //'can'  => 'manage-blog',
+            'icon' => 'fas fa-fw fa-address-book',
+        ],
+        [
             'text'        => 'pages',
             'url'         => 'admin/pages',
             'icon'        => 'far fa-fw fa-file',
