@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PlanDetailController;
+use App\Http\Controllers\Admin\ProfileController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,6 +22,18 @@ Route::get('/', function () {
 
 Route::prefix('admin')
     ->group(function(){
+
+        /**
+         * Profiles Routes
+         */
+        Route::get('profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
+        //Route::put('plans/{url}', [PlanController::class, 'update'])->name('plans.update');
+        //Route::get('plans/{url}/edit', [PlanController::class, 'edit'])->name('plans.edit');
+        Route::any('profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
+        //Route::delete('plans/{url}', [PlanController::class, 'destroy'])->name('plans.destroy');
+        //Route::get('plans/{url}', [PlanController::class, 'show'])->name('plans.show');
+        //Route::post('plans', [PlanController::class, 'store'])->name('plans.store');
+        Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index');
 
         /**
          * Plans Details Routes
