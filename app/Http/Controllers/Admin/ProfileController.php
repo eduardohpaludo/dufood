@@ -37,7 +37,7 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.profiles.create');
     }
 
     /**
@@ -48,7 +48,9 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->repository->create($request->all());
+        
+        return redirect()->route('profiles.index');
     }
 
     /**

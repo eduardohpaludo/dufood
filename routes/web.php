@@ -32,7 +32,7 @@ Route::prefix('admin')
         Route::any('profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
         //Route::delete('plans/{url}', [PlanController::class, 'destroy'])->name('plans.destroy');
         //Route::get('plans/{url}', [PlanController::class, 'show'])->name('plans.show');
-        //Route::post('plans', [PlanController::class, 'store'])->name('plans.store');
+        Route::post('profiles', [ProfileController::class, 'store'])->name('profiles.store');
         Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index');
 
         /**
