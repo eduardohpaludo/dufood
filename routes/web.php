@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Admin\PlanDetailController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -22,6 +23,18 @@ Route::get('/', function () {
 
 Route::prefix('admin')
     ->group(function(){
+
+        /**
+         * Permissions Routes
+         */
+        Route::get('permissions/create', [PermissionController::class, 'create'])->name('permissions.create');
+        Route::put('permissions/{id}', [PermissionController::class, 'update'])->name('permissions.update');
+        Route::get('permissions/{id}/edit', [PermissionController::class, 'edit'])->name('permissions.edit');
+        Route::any('permissions/search', [PermissionController::class, 'search'])->name('permissions.search');
+        Route::delete('permissions/{id}', [PermissionController::class, 'destroy'])->name('permissions.destroy');
+        Route::get('permissions/{id}', [PermissionController::class, 'show'])->name('permissions.show');
+        Route::post('permissions', [PermissionController::class, 'store'])->name('permissions.store');
+        Route::get('permissions', [PermissionController::class, 'index'])->name('permissions.index');
 
         /**
          * Profiles Routes
