@@ -27,11 +27,11 @@ Route::prefix('admin')
          * Profiles Routes
          */
         Route::get('profiles/create', [ProfileController::class, 'create'])->name('profiles.create');
-        //Route::put('plans/{url}', [PlanController::class, 'update'])->name('plans.update');
-        //Route::get('plans/{url}/edit', [PlanController::class, 'edit'])->name('plans.edit');
+        Route::put('profiles/{id}', [ProfileController::class, 'update'])->name('profiles.update');
+        Route::get('profiles/{id}/edit', [ProfileController::class, 'edit'])->name('profiles.edit');
         Route::any('profiles/search', [ProfileController::class, 'search'])->name('profiles.search');
-        //Route::delete('plans/{url}', [PlanController::class, 'destroy'])->name('plans.destroy');
-        //Route::get('plans/{url}', [PlanController::class, 'show'])->name('plans.show');
+        Route::delete('profiles/{id}', [ProfileController::class, 'destroy'])->name('profiles.destroy');
+        Route::get('profiles/{id}', [ProfileController::class, 'show'])->name('profiles.show');
         Route::post('profiles', [ProfileController::class, 'store'])->name('profiles.store');
         Route::get('profiles', [ProfileController::class, 'index'])->name('profiles.index');
 

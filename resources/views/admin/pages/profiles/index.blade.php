@@ -32,9 +32,8 @@
                         <tr>
                             <td>{{$profile->name}}</td>
                             <td>
-                                <a href="" class="btn btn-primary" ><i class="fas fa-info-circle"></i></a>
-                                <a href="" class="btn btn-info" ><i class="fas fa-pencil-alt"></i></a>
-                                <a href="" class="btn btn-warning"><i class="fas fa-eye"></i></a>
+                                <a href="{{ route('profiles.edit', ['id' => $profile->id]) }}" class="btn btn-info" ><i class="fas fa-pencil-alt"></i></a>
+                                <a href="{{ route('profiles.show', ['id' => $profile->id]) }}" class="btn btn-warning"><i class="fas fa-eye"></i></a>
                             </td>
                         </tr>
                     @endforeach
